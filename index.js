@@ -30,7 +30,7 @@ function addObjectWithLocation(a,x,y){
   a.push({
       "x": x,
       "y": y,
-      "c": x/5,
+      "c": x/3,
       "a": 1,
       "d": 90,
       "angle": 270,
@@ -47,10 +47,10 @@ if(o.y > h || o.y < 0){
 }
 }
 function text() {
-  ctx.font="100px Arial";
+  ctx.font="100px gambado-sans-forte";
   ctx.fillStyle = "white";
   ctx.textAlign = "center";
-  ctx.fillText("hover", canvas.width/2, canvas.height/2);
+  ctx.fillText("hover over me!", canvas.width/2, canvas.height/2);
 }
 function clear(){
   ctx.clearRect(0,0,w,h);
@@ -120,7 +120,6 @@ function setUpCanvas(){
   ctx = canvas.getContext("2d");
   canvas.width = w;
   canvas.height = h;
-  canvas.style.border = "2px solid green";
 }
  
  
