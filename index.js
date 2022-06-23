@@ -3,9 +3,16 @@ var ctx;
 var w = window.innerWidth;;
 var h = window.innerHeight;
 var allCirc = [];
+
+//I was much more comfortable just drawing from my previous knowledge of javascript, so I didn't use any jQuery!
+
 document.querySelector("#myCanvas").onmousemove = move;
+
+// CALLING FUNCTIONS
 setUpCanvas();
 animationLoop();
+
+//ANIMATIONS
 function animationLoop(){
   clear();
 for(var i = 0; i<allCirc.length; i++){
@@ -17,15 +24,13 @@ for(var i = 0; i<allCirc.length; i++){
   text();
   requestAnimationFrame(animationLoop);
 }
+
+//drawing from mouse position to generate circles
 function move(event){
   addObjectWithLocation(allCirc, event.offsetX, event.offsetY);
-  // moveChange;
 }
-// function moveChange(event){
-//     a.c = 100+event.offsetX/5;
-//     a.c = 100+event.offsetY/5;
-// }
-//object editing
+
+//adding object to array
 function addObjectWithLocation(a,x,y){
   a.push({
       "x": x,
@@ -38,6 +43,10 @@ function addObjectWithLocation(a,x,y){
       "r":y/10
   })
 }
+
+//FUNCTIONS
+
+//allows circles to "bounce" off the edge of the canvas (essentially reflecting back)
 function bounce(o){
 if(o.x > w || o.x < 0){
   turn(o,180);
@@ -46,15 +55,19 @@ if(o.y > h || o.y < 0){
   turn(o,180);
 }
 }
+
 function text() {
   ctx.font="100px gambado-sans-forte";
   ctx.fillStyle = "white";
   ctx.textAlign = "center";
   ctx.fillText("hover over me!", canvas.width/2, canvas.height/2);
 }
+
+//clears the canvas
 function clear(){
   ctx.clearRect(0,0,w,h);
 }
+//allows circles to move forwaed
 function forward(o,d){
   var changeX;
   var changeY;
@@ -67,24 +80,14 @@ function forward(o,d){
   o.x += changeX;
   o.y += changeY;
 }
+//allows circles to turn based on an angle
 function turn(o, angle){
   if(angle != undefined){
       o.changle = angle;
   };
   o.angle += o.changle;
 }
-function forward(o,d){
-  var changeX;
-  var changeY;
-  var oneDegree = Math.PI/180; // 2*Math.PI/360
-  if(d != undefined){
-      o.d = d;
-  };
-  changeX = o.d*Math.cos(o.angle*oneDegree);
-  changeY = o.d*Math.sin(o.angle*oneDegree);
-  o.x += changeX;
-  o.y += changeY;
-}
+
 // BASIC FUNCTIONS
 function heart(o){
     ctx.beginPath();
@@ -101,8 +104,9 @@ function circle(o){
   ctx.arc(o.x,o.y,o.r,0,2*Math.PI);
   ctx.fillStyle = "hsla("+o.c+",100%,50%,"+o.a+")";
   ctx.fill();
-  // ctx.stroke();
 }
+
+//random functions
 function randn(r){
   var result = Math.random()*r - r/2;
   return result
@@ -115,6 +119,8 @@ function rand(r){
   var result = Math.random()*r;
   return result
 }
+
+//canvas set up
 function setUpCanvas(){
   canvas = document.querySelector("#myCanvas");
   ctx = canvas.getContext("2d");
